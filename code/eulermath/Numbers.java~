@@ -1,0 +1,82 @@
+package eulermath;
+
+/*
+Class for common number routines
+*/
+
+public class Numbers {
+
+    private static int primeCount = -1;
+    private static int compositeCount = -1;
+    
+    /*
+      Get the number of digits of the given integer.
+    */
+    public static int numberOfDigits(int x) {
+	int numberOfDigits = 0;
+	int diminishing = (int)Math.abs(x);
+	if(diminishing < 10) {
+	    numberOfDigits = 1;
+	} else {
+	    while(diminishing > 0) {
+		diminishing /= 10;
+		numberOfDigits++;
+	    }
+	}
+	return numberOfDigits;
+    }
+
+    /*
+      Generate primes up to but not including the given integer limit, using a sieve method.
+    */
+    public static int[] getPrimesToLimit(int limit) {
+	boolean[] sieve = Numbers.primeCompositeSieve(limit);
+	int[] primes = new int[compositeCount];
+	int primeIndex = 0;
+	for(int i = 0; i < sieve.length; i++) {
+	    if(!sieve[i]) {
+		primes[primeIndex] = i;
+		primeIndex++;
+	    }
+	}
+	return primes;
+    }
+
+    /* 
+       Generate composites up to but not including the given integer limit, using a sieve method.
+    */
+    public static int[] getCompositesToLimit(int limit) {
+	boolean[] sieve = Numbers.primeCompositeSieve(limit);
+	int[] composities = new int[compositeCount];
+	int primeIndex = 0;
+	for(int i = 0; i < sieve.length; i++) {
+	    if(!sieve[i]) {
+		primes[primeIndex] = i;
+		primeIndex++;
+	    }
+	}
+	return primes;
+    }
+
+    /* 
+       Generate a boolean array indicating which integers are prime and which are
+       composite up to but not including the given integer limit.
+       Prime p is indicated by false at index location p in the array.
+       Conversely, composite c is indicated by a true value at the corresponding location in the array.
+    */
+    private static boolean[] primeCompositeSieve(int limit) {
+	sieve[0] = true; // take care of the base cases
+	sieve[1] = true;
+	int compositeCount = 0;
+	int largestMultiplier = (int)Math.ceil(Math.sqrt(sieve.length-1));
+	for(int multiplier = 2; multiplier <= largestMultiplier; multiplier++) {
+	    for(int multiple = multiplier*2; multiple < sieve.length; multiple += multiplier) {
+		if(!sieve[multiple]) {
+		    sieve[multiple] = true;
+		    compositeCount++;
+		}
+	    }
+	}
+	return sieve;
+    }
+}

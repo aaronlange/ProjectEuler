@@ -1,0 +1,54 @@
+
+
+public class Problem572 {
+
+    public static final int MAX_ELEMENT_INDEX = 8;
+
+    public static final int MAX_ELEMENT_VALUE = 1;
+
+    private static int solutionCount = 0;
+
+    public static void main(String[] args) {
+
+
+
+    }
+
+    public static void incrementSolutionCount() {
+	solutionCount++;
+    }
+}
+
+class MatrixTreeNode {
+
+    private int[] solution;
+    private boolean[] known;
+
+    public MatrixTreeNode(int[] s, boolean[] k, int nextUnknown, int nextValue) {
+	solution = s.copyOf();
+	known = k.copyOf();
+	if(Problem572.isPossible(solution, nextUnknown, nextValue)) {
+	    solution[nextUnknown] = nextValue;
+	    known[nextUnknown] = true;
+	    // find new next unknown
+	    boolean foundAnotherUnknown = false;
+	    for(i = nextUnknown + 1; i < Problem572.MAX_ELEMENT_INDEX; i++) {
+		if(known[i] = false) {
+		    foundAnotherUnknown = true;
+		    // create child nodes
+		    for(int val = -MAX_ELEMENT_VALUE; val <= MAX_ELEMENT_VALUE; val++) {
+			MatrixTreeNode childNode = new MatrixTreeNode(solution, known, i, val);
+		    }
+		    // we only create child nodes for a single unknown variable for any given node
+		    continue;
+		}
+	    }
+	    if(foundAnotherUnknown = false) {
+		// all variables solved for, so add to solution count
+		Problem572.incrementSolutionCount();
+	    }
+	} 
+    }
+}
+
+

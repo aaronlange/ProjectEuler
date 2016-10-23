@@ -1,0 +1,7 @@
+public class TestBed {
+    public static void main(String[] args) {
+	for(int i = -101; i <= 101; i++) {
+	    System.out.println(i + " has " + Numbers.numberOfDigits(i) + " digits");
+	}
+    }
+}

@@ -1,0 +1,56 @@
+import java.io.*;
+
+public class Problem42 {
+    public static void main(String[] args) {
+	/* generate triangle numbers; use formula t_n = 0.5*(n+1)*(n+2) 
+	   since we're starting from t_0 rather than t_1 as in the problem description 
+	   triangle numbers may also be defined recursively, i.e. t_0 = 1 and t_n = t_(n-1) + n+2 */
+
+	int numOfTriNumbers = 30;
+	int[] triangleNumbers = new int[numOfTriNumbers]; // !!! if errors, check no triangle numbers are greater than biggest one in the array
+	triangleNumbers[0] = 1;
+	System.out.println("Triangle number 0 is " + triangleNumbers[0]);
+	for(int i=1; i<triangleNumbers.length; i++) {
+	    triangleNumbers[i] = triangleNumbers[i-1] + i + 2; 
+	    System.out.println("Triangle number " + i + " is " + triangleNumber[i]);
+	}
+
+	/* read in file with words from which to generate the "word values" */
+	File wordFile = new File(new BufferedReader(new FileReader("p042_words.txt")));
+
+	String data = new String();
+	String line = new String();
+
+	while((line = BufferedReader.readLine()) != null) {
+	    data = data + line;
+	}
+
+	/* organise words into an array */
+	String[] words = data.split(",");
+
+	System.out.println(words.length + " words found in the file");
+	
+	/* compute word values corresponding to each word and count how many are triangle numbers */
+	int count = 0;
+
+	for(int i = 0; i < wordValues.length; i++) {
+	    wordValue = getWordValue(words[i]);
+
+	    // sanity check: it shouldn't be bigger than the biggest triangle number
+	    if(wordValue > triangleNumbers[triangleNumbers.length-1]) {
+		System.out.println("Need more triangle numbers since is doesn't go up to " + wordValue);
+	    }
+
+	    // count it if it's a triangle number
+	    if(Arrays(triangleNumbers, wordValue) >= 0) count++;
+	}
+
+	/*
+
+
+    }
+
+    public static getWordValue(String word) {
+
+    }
+}

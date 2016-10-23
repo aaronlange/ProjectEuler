@@ -1,0 +1,82 @@
+public class SolutionTreeNode {
+
+    public static final int A = 0;
+    public static final int B = 1;
+    public static final int C = 2;
+    public static final int D = 3;
+    public static final int E = 4;
+    public static final int F = 5;
+    public static final int G = 6;
+    public static final int H = 7;
+    public static final int I = 8;
+
+    public static final int VAR_COUNT = 9;
+
+    private Variable[] v;
+
+    public SolutionTreeNode(SolutionTreeNode parent, int variableID, int value) {
+	// copy parent's variables
+	v = new Variable[VAR_COUNT];
+	for(int i = 0; i < v.length; i++) {
+	    v[i] = new Variable(parent.v[i]);
+	}
+
+	// set new variable 
+	v[variableID] = value;
+
+	// check for indempotency
+	boolean solutionPossible = true;
+	for(int i = 0; i < v.length; i++) {
+	    if(!v[i].isSolved()) {
+		solutionPossible = false; // not indempotent if one of the variables doesn't yet have a value
+		continue;
+	    }
+	}
+	if(solutionPossible) { // all variables have been solved, so check the squared matrix element expressions
+	    if(valueOfExpression(v[A],v[A], v[B],v[D], v[C],v[G], v[A]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[A],v[B], v[B],v[E], v[C],v[H], v[B]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[A],v[C], v[B],v[F], v[C],v[I], v[C]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[D],v[A], v[E],v[D], v[F],v[G], v[D]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[D],v[B], v[E],v[E], v[F],v[H], v[E]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[D],v[C], v[E],v[F], v[F],v[I], v[F]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[G],v[A], v[H],v[D], v[I],v[G], v[G]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[G],v[B], v[H],v[E], v[I],v[H], v[H]) != 0) {
+		solutionFound = false;
+	    }
+	    if(valueOfExpression(v[G],v[C], v[H],v[F], v[I],v[I], v[I]) != 0) {
+		solutionFound = false;
+	    }
+	}
+	if(solutionPossible) { // it passed all the tests
+	    System.out.println("Found solution: " + solutionToString());
+	}
+    }
+
+    private String solutionToString() {
+	String solution = new String("(");
+	for(int i = 0; i < v.length-1; i++) {
+	    solution = solution.concat(v[i].value() + ", ");
+	}
+	solution = solution.concat(v[length-1].value() + ")");
+	return solution;
+    }
+
+    private int valueOfExpression(Variable x0, Variable x1, Variable x2, Variable x3, Variable x4, Variable x5, Variable x6) {
+	return v[x0].value()*v[x1].value() + v[x2].value()*v[x3].value() + v[x4].value()*v[x5].value() - v[x6].value();
+    }
+
+}

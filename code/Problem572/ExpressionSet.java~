@@ -1,0 +1,21 @@
+
+public class ExpressionSet {
+
+    private static final int VAR_COUNT = 9;
+
+    Variable[] variables;
+    Expression[] expressions;
+
+    public ExpressionSet(int maxAbsVal) {
+	variables = new Variable[VAR_COUNT];
+	for(int i = 0; i < variables.length; i++) {
+	    variables[i] = new Variable(maxAbsVal);
+	}
+	expressions = new Expression[VAR_COUNT];
+
+    }
+
+    public boolean set(Variable var, int val) {
+
+    }
+}

@@ -1,0 +1,7 @@
+
+
+public class Problem572v2 {
+    public static void main(String[] args) {
+	EquationSet eqset = new EquationSet(Integer.parseInt(args[0]));
+    }
+}

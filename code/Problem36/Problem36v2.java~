@@ -1,0 +1,66 @@
+				} else {
+					// cut off end digits
+					testCaseDegen -= (int)Math.pow(10, decimalDigits-d);
+					testCaseDegen /= 10;
+				}
+			}
+
+			// test the binary case
+			boolean isBinaryPalindrome = true;
+			int[] binaryCase = decimalToBinary(testCase);
+			for(int d = 0; d <= binaryCase.length/2 - 1; d++) {
+				if(binaryCase[d] != binaryCase[binaryCase.length-1-d]) {
+					isBinaryPalindrome = false;
+					break;
+				}
+			}
+			if(isDecimalPalindrome && isBinaryPalindrome) {
+				numPalindromes++;
+				System.out.print(testCase + "; ");
+				for(int i = 0; i < binaryCase.length; i++) {
+					System.out.print(binaryCase[i]);
+				}
+				System.out.println("");
+			}
+			
+		}
+		System.out.println("num palindromes = " + numPalindromes);
+	}
+	
+	public static int[] decimalToBinary(int decimalNumberParam) {
+		// count binary digits
+		int digits = 0;
+		int decimalNumber = decimalNumberParam;
+		if(decimalNumber == 0) {
+			digits = 1;
+		} else {
+			while(decimalNumber > 0) {
+				decimalNumber /= 2;
+				digits++;
+			}
+		}
+		// make array representing binary form of the decimal number
+		// big endian format is used
+		int[] binary = new int[digits];
+		decimalNumber = decimalNumberParam;
+		if(decimalNumber == 0) {
+			binary[0] = 0;
+		} else {
+			for(int digitLocation = digits-1; digitLocation >= 0; digitLocation--) {
+				if(decimalNumber == 0) {
+					binary[digits-digitLocation-1] = 0;
+					continue;
+				}
+				int exponentComponent = (int)Math.pow(2,digitLocation);
+				if(decimalNumber >= exponentComponent) {
+					binary[digits-digitLocation-1] = 1;
+					decimalNumber -= exponentComponent;
+				} else {
+					binary[digitLocation] = 0;
+				}
+			}
+		}
+		return binary;
+	
+	}
+}

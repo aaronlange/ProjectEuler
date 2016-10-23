@@ -1,0 +1,29 @@
+/*
+
+Long number represented in a certain base.
+
+*/
+
+public class BasedLong {
+
+    private long number;
+    private int base;
+    private int[] digits; // as per the base. First index is most significant.
+
+    BasedLong(long number; int base) {
+	this.number = number;
+	this.base = base;
+	// create digit representation of the number in the given base. First index is the most significant
+	digits = new int[(int)(Math.log(this.number) / Math.log(base)) + 1];
+	long leftOver = number;
+	int index = digits.length - 1;
+	for(int index = digits.length - 1; index >= 0; index++) {
+	    int remainder = leftOver % base;
+	    digits[index] = remainder;
+	    leftOver /= base;
+	}
+	// sanity check
+	assert leftOver == 0;
+    }
+
+}

@@ -1,0 +1,12 @@
+package eulermath;
+
+/* 
+   A prime-composite sieve partition object partitions natural numbers into primes and composites (via a sieve method).
+*/
+public class PrimeCompositePartition {
+
+    public PrimeCompositeSieve(int limit) {
+
+    }
+
+}

@@ -1,0 +1,23 @@
+public class SolutionTreeNode {
+
+    private static long solutionCount = 0;
+
+    private ExpressionSet exprSet;
+
+    SolutionTreeNode(ExpressionSet e, Variable var, int val) {
+	this.exprSet = e;
+	if(exprSet.set(var, val)) {
+	    if(exprSet.isSolved()) {
+		System.out.println("found solution: " + exprSet.printSolution());
+		solutionCount++;
+	    } else {
+		// procreate
+		Variable nextVarToSet = exprSet.nextUnknown();
+		int minVal = nextVarToSet.min();
+		int maxVal = nextVarToSet.max();
+		for(val = minVal; val < maxVal; val++) {
+		    new SolutionTreeNode(exprSet.clone(), nextVarToSet, val);
+		}
+	}
+    }
+}

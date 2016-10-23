@@ -1,0 +1,12 @@
+public class Problem43 {
+    public static void main(String[] args) {
+	/* set up first pandigital number 0123456789 */
+	int[] p = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+	/* test the substring divibility of all of the 0-9 pandigital numbers */
+	while(true) {
+	    /* test d2d3d4 mod 2 = 0 */
+	    if(p[3] % 2 != 0) continue;
+	}
+    }
+}

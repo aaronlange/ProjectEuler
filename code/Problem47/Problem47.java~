@@ -1,0 +1,49 @@
+/* 
+PROBLEM: 
+Distinct primes factors
+Problem 47
+The first two consecutive numbers to have two distinct prime factors are:
+
+14 = 2 × 7
+15 = 3 × 5
+
+The first three consecutive numbers to have three distinct prime factors are:
+
+644 = 2² × 7 × 23
+645 = 3 × 5 × 43
+646 = 2 × 17 × 19.
+
+Find the first four consecutive integers to have four distinct prime factors. What is the first of these numbers?
+*/
+
+/*
+SOLUTION:
+Solution is as follows: 
+- use a basic sieve method to identify composite numbers
+- as we go, we'll add each prime factor for each composite number to a list containing the other prime factors for that composite
+- when we find a composite number with 4 (and no more) prime factors, we'll check to see if enough neighbouring numbers also have four identified prime factors
+If they do, then we stop, otherwise we keep going.
+
+The complexity of this solution is O(n^2) for n = size of integer set to search, when n is small
+Complexity approaches O(n) as n approaches infinity, due to ratio of primes : composites approaching 0 as n approaches infinity. I think? Rough in-the-head visualisation to estimate this...
+*/
+
+import eulermath.*;
+
+public class Problem47 {
+    public static void main(String[] args) {
+	final int MAX_INTEGER_PLUS_1 = 100;
+	final int TARGET_PRIME_FACTOR_LIST_SIZE = 2;
+
+	PartialPrimeFactorList[] factorLists = new PartialPrimeFactorList[MAX_INTEGER_PLUS_1];
+
+	/* Enter sieve... */
+	int max_factor = (int)Math.sqrt(MAX_INTEGER_PLUS_1 - 1);
+	for(int primeFactor = 2; primeFactor <= max_factor; primeFactor++) {
+	    int multipliedFactor;
+	    for(int multiple = 2; (multipliedFactor = primeFactor*multiple) < factorLists.length; multiple++) {
+		// we only care about primes multiplied by primes
+	    }
+	}
+    }
+}

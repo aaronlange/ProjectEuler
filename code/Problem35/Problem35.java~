@@ -1,0 +1,68 @@
+/* 
+Circular primes
+Problem 35
+
+The number, 197, is called a circular prime because all rotations of the digits: 197, 971, and 719, are themselves prime.
+
+There are thirteen such primes below 100: 2, 3, 5, 7, 11, 13, 17, 31, 37, 71, 73, 79, and 97.
+
+How many circular primes are there below one million?
+*/
+
+public class Problem35 {
+    public static void main(String[] args) {
+	boolean[] isPrime = new boolean[1000000];
+	markPrimes(isPrime);
+
+
+    }
+
+    public static void markPrimes(int[] isPrime) {
+	isPrime[0] = false;
+	isPrime[1] = false;
+	int maxDivisor = (int)Math.sqrt(isPrime.length);
+	for(int divisor = 2; divisor <= maxDivisor; divisor++) {
+	    int divisorMultiple = divisor*2;
+	    while(divisorMultiple < isPrime.length) {
+		isPrime[divisorMultiple] = false;
+		divisorMultiple += divisor;
+	    }
+	}
+    }
+
+    public static int numberOfDigits(int x) {
+	int diminishing = x;
+	int count = 0;
+	while(diminishing > 0) {
+	    count++;
+	    diminishing /= 10;
+	}
+	return diminishing;
+    }
+
+    /*
+      Split digits of x into array. Most significant digit comes first.
+     */
+    public static int[] digitsToArray(int x) {
+	int numDigits = numberOfDigits(x);
+	int[] digitized = new int[numDigits];
+	int diminishing = x;
+	for(int i = numDigits-1; i >= 0; i--) {
+	    digitized[i] = diminishing%10;
+	    diminishing /= 10;
+	}
+	return digitized;
+    }
+
+    /* 
+       rotate digits one place towards the left 
+     (most significant digit goes to the end)
+    */
+    public static void rotate(int[] digits) {
+	int mostSignificant = digits[0];
+	for(int i = 1; i < digits.length; i++) {
+	    digits[i-1] = digits[i];
+	}
+	digits[digits.length-1] = mostSignificant;
+    }
+}
